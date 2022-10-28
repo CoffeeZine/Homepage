@@ -2,36 +2,75 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React, { useState } from "react";
+import { prisma } from "../lib/prisma";
+import { GetServerSideProps, NextPage } from "next";
+import { useRouter } from "next/router";
+interface Notes {
+  notes: { title: string; content: string; id: string }[];
+}
 interface FormData {
   title: string;
   content: string;
   id: string;
 }
-export default function Home() {
+const Home = ({ notes }: Notes) => {
   const [form, setFrom] = useState<FormData>({
     title: "",
     content: "",
     id: "",
   });
+  const router = useRouter();
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
   async function create(data: FormData) {
     try {
-      await fetch("https://localhost:3000/api/create", {
+      fetch("http://localhost:3000/api/create", {
         body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
         method: "POST",
-      }).then(() =>
-        setFrom({
-          title: "",
-          content: "",
-          id: "",
-        })
-      );
+        headers: {
+          accept: "application/json",
+        },
+      }).then(() => {
+        if (data.id) {
+          deleteNote(data.id);
+          setFrom({
+            title: "",
+            content: "",
+            id: "",
+          });
+          refreshData();
+        } else {
+          setFrom({
+            title: "",
+            content: "",
+            id: "",
+          });
+          refreshData();
+        }
+      });
     } catch (error) {
-      console.log("error");
+      console.log("error", error);
     }
   }
+
+  async function deleteNote(id: string) {
+    try {
+      fetch(`http://localhost:3000/api/note/${id}`, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+        },
+      }).then(() => {
+        refreshData();
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
   const handleSubmit = async (data: FormData) => {
     try {
       await create(data);
@@ -65,6 +104,49 @@ export default function Home() {
           Add +
         </button>
       </form>
+      <div className="">
+        <ul>
+          {notes.map((note) => (
+            <li key={note.id}>
+              <div>
+                <div className="">
+                  <h3>{note.title}</h3>
+                  <h4>{note.content}</h4>
+                </div>
+                <button
+                  onClick={() =>
+                    setFrom({
+                      title: note.id,
+                      content: note.content,
+                      id: note.id,
+                    })
+                  }
+                >
+                  update
+                </button>
+                <button onClick={() => deleteNote(note.id)}>Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
-}
+};
+
+export default Home;
+export const getServerSideProps: GetServerSideProps = async () => {
+  const notes = await prisma.note.findMany({
+    select: {
+      title: true,
+      id: true,
+      content: true,
+    },
+  });
+
+  return {
+    props: {
+      notes,
+    },
+  };
+};
