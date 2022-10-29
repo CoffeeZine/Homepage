@@ -127,7 +127,7 @@ const Home = ({ notes }: Notes) => {
                   onClick={() => deleteNote(note.id)}
                   className="bg-red-500 px-3 text-white rounded"
                 >
-                  X
+                  Cancel
                 </button>
               </div>
             </li>
