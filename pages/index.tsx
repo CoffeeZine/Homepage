@@ -11,6 +11,13 @@ interface Notes {
   }[];
 }
 
+interface Logins {
+  login: {
+    id: string;
+    name: string;
+    password: string;
+  }[];
+}
 interface FormData {
   title: string;
   content: string;
