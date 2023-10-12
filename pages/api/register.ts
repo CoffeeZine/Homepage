@@ -9,7 +9,7 @@ export default async function handler(
 
   try {
     console.log(`${title} and ${content}`);
-    await prisma.user.create({
+    await prisma.users.create({
       data: {
         title: title,
         content: content,
