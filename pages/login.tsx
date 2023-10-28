@@ -14,7 +14,7 @@ interface FormData {
   email: string;
   password: string;
 }
-
+//25 year old version
 const Login = ({ login }: Logins) => {
   const [form, setForm] = useState<FormData>({
     email: "",
