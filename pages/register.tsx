@@ -53,7 +53,7 @@ const Register = ({ login }: Logins) => {
 
   return (
     <div>
-      <h1 className="text-center font-bold text-2xl mt-4">Login</h1>
+      <h1 className="text-center font-bold text-2xl mt-4">Register</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -78,7 +78,7 @@ const Register = ({ login }: Logins) => {
           className="border-2 rounded border-gray-600 p-1"
         />
         <button type="submit" className="bg-blue-500 text-white rounded p-1">
-          login
+          Register
         </button>
       </form>
     </div>
