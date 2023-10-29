@@ -8,7 +8,7 @@ export default async function handler(
   const noteId = req.query.id;
   if (req.method === "DELETE") {
     const note = await prisma.note.delete({
-      where: { id: Number(noteId) },
+      where: { id: String(noteId) },
     });
   } else {
     console.log("note could not be created");

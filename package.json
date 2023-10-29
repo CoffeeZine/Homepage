@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db-seed": "tsc prisma/seed.ts && cat prisma/seed.js | node --input-type=\"commonjs\" && rm prisma/seed.js"
   },
   "dependencies": {
     "@next/swc-darwin-arm64": "^13.5.4",
@@ -26,6 +27,10 @@
     "postcss": "^8.4.18",
     "prisma": "^4.16.2",
     "tailwindcss": "^3.2.1",
-    "typescript": "4.8.4"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }
