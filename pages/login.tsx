@@ -15,6 +15,7 @@ interface FormData {
   password: string;
 }
 //25 year old version
+//prisma
 const Login = ({ login }: Logins) => {
   const [form, setForm] = useState<FormData>({
     email: "",
