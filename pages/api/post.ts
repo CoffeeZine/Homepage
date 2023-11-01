@@ -1,18 +1,35 @@
 import { prisma } from "../../lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
-
+type Nullable<T> = T | null;
+interface Author {
+  id: string;
+  email: string;
+  password: string;
+  name?: string;
+  address?: string;
+}
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { title, content } = req.body;
+  const { title, slug, body, author } = req.body;
 
   try {
-    console.log(`${title} and ${content}`);
-    await prisma.note.create({
+    console.log(`${title} and ${slug}`);
+    const response = await prisma.user.findFirst({
+      where: {
+        email: {
+          equals: "!12@12",
+        },
+      },
+    });
+    console.log(response);
+    await prisma.post.create({
       data: {
         title: title,
-        content: content,
+        slug: slug,
+        body: body,
+        author: author,
       },
     });
     res.status(200).json({ message: "Note Created" });

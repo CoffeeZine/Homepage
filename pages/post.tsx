@@ -4,10 +4,11 @@ import { useState } from "react";
 import { prisma } from "../lib/prisma";
 
 interface Posts {
-  notes: {
+  posts: {
     id: string;
     title: string;
-    content: string;
+    body: string;
+    slug: string;
   }[];
 }
 
@@ -20,14 +21,16 @@ interface Logins {
 }
 interface FormData {
   title: string;
-  content: string;
+  body: string;
+  slug: string;
   id: string;
 }
 
-const Post = ({ notes }: Posts) => {
+const Post = ({ posts }: Posts) => {
   const [form, setForm] = useState<FormData>({
     title: "",
-    content: "",
+    body: "",
+    slug: "",
     id: "",
   });
   const router = useRouter();
@@ -38,7 +41,7 @@ const Post = ({ notes }: Posts) => {
 
   async function create(data: FormData) {
     try {
-      fetch("http://localhost:3000/api/create", {
+      fetch("http://localhost:3000/api/post", {
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
@@ -47,10 +50,10 @@ const Post = ({ notes }: Posts) => {
       }).then(() => {
         if (data.id) {
           deleteNote(data.id);
-          setForm({ title: "", content: "", id: "" });
+          setForm({ title: "", slug: "", body: "", id: "" });
           refreshData();
         } else {
-          setForm({ title: "", content: "", id: "" });
+          setForm({ title: "", slug: "", body: "", id: "" });
           refreshData();
         }
       });
@@ -61,7 +64,7 @@ const Post = ({ notes }: Posts) => {
 
   async function deleteNote(id: string) {
     try {
-      fetch(`http://localhost:3000/api/note/${id}`, {
+      fetch(`http://localhost:3000/api/post/${id}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -99,10 +102,17 @@ const Post = ({ notes }: Posts) => {
           onChange={(e) => setForm({ ...form, title: e.target.value })}
           className="border-2 rounded border-gray-600 p-1"
         />
+        <input
+          type="text"
+          placeholder="Slug"
+          value={form.slug}
+          onChange={(e) => setForm({ ...form, slug: e.target.value })}
+          className="border-2 rounded border-gray-600 p-1"
+        />
         <textarea
           placeholder="Content"
-          value={form.content}
-          onChange={(e) => setForm({ ...form, content: e.target.value })}
+          value={form.body}
+          onChange={(e) => setForm({ ...form, body: e.target.value })}
           className="border-2 rounded border-gray-600 p-1"
         />
         <button type="submit" className="bg-blue-500 text-white rounded p-1">
@@ -111,19 +121,20 @@ const Post = ({ notes }: Posts) => {
       </form>
       <div className="w-auto min-w-[25%] max-w-min mt-20 mx-auto space-y-6 flex flex-col items-stretch">
         <ul>
-          {notes.map((note) => (
-            <li key={note.id} className="border-b border-gray-600 p-2">
+          {posts.map((post) => (
+            <li key={post.id} className="border-b border-gray-600 p-2">
               <div className="flex justify-between">
                 <div className="flex-1">
-                  <h3 className="font-bold">{note.title}</h3>
-                  <p className="text-sm">{note.content}</p>
+                  <h3 className="font-bold">{post.title}</h3>
+                  <p className="text-sm">{post.body}</p>
                 </div>
                 <button
                   onClick={() =>
                     setForm({
-                      title: note.title,
-                      content: note.content,
-                      id: note.id,
+                      title: post.title,
+                      body: post.body,
+                      slug: post.slug,
+                      id: post.id,
                     })
                   }
                   className="bg-blue-500 mr-3 px-3 text-white rounded"
@@ -131,7 +142,7 @@ const Post = ({ notes }: Posts) => {
                   Update
                 </button>
                 <button
-                  onClick={() => deleteNote(note.id)}
+                  onClick={() => deleteNote(post.id)}
                   className="bg-red-500 px-3 text-white rounded"
                 >
                   Cancel
@@ -148,17 +159,18 @@ const Post = ({ notes }: Posts) => {
 export default Post;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const notes = await prisma.note.findMany({
+  const posts = await prisma.post.findMany({
     select: {
       title: true,
       id: true,
-      content: true,
+      body: true,
+      slug: true,
     },
   });
 
   return {
     props: {
-      notes,
+      posts,
     },
   };
 };
