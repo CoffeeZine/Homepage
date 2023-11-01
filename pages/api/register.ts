@@ -5,18 +5,19 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { title, content } = req.body;
+  const { email, password } = req.body;
 
   try {
-    console.log(`${title} and ${content}`);
-    await prisma.users.create({
+    console.log(`${email} and ${password}`);
+    await prisma.user.create({
       data: {
-        title: title,
-        content: content,
+        email: email,
+        password: password,
       },
     });
     res.status(200).json({ message: "Note Created" });
     console.log("no server error");
+    alert("user created!");
   } catch (err) {
     console.log("error server");
     res.status(408).json({ message: "Request Timeout" });
