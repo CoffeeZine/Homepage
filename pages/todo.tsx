@@ -3,7 +3,11 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { prisma } from "../lib/prisma";
 // TODO
-
+//setting eg user details address
+//home page ui and design
+//page [id] details of the post
+//login page ui and design
+//login system
 const TodoPage = () => {
   return (
     <div>
