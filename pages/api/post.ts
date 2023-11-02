@@ -13,7 +13,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { title, slug, body, author } = req.body;
-
+  //need to check back the author then return and save the post
   try {
     console.log(`${title} and ${slug}`);
     const response = await prisma.user.findFirst({
