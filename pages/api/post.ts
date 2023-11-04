@@ -1,13 +1,6 @@
 import { prisma } from "../../lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
-type Nullable<T> = T | null;
-interface Author {
-  id: string;
-  email: string;
-  password: string;
-  name?: string;
-  address?: string;
-}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

@@ -2,30 +2,10 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { prisma } from "../lib/prisma";
-
-interface Notes {
-  notes: {
-    id: string;
-    title: string;
-    content: string;
-  }[];
-}
-
-interface Logins {
-  login: {
-    id: string;
-    name: string;
-    password: string;
-  }[];
-}
-interface FormData {
-  title: string;
-  content: string;
-  id: string;
-}
+import { Notes, NoteFormData } from "../constant/index";
 
 const Home = ({ notes }: Notes) => {
-  const [form, setForm] = useState<FormData>({
+  const [form, setForm] = useState<NoteFormData>({
     title: "",
     content: "",
     id: "",
@@ -36,7 +16,7 @@ const Home = ({ notes }: Notes) => {
     router.replace(router.asPath);
   };
 
-  async function create(data: FormData) {
+  async function create(data: NoteFormData) {
     try {
       fetch("http://localhost:3000/api/create", {
         body: JSON.stringify(data),
@@ -74,7 +54,7 @@ const Home = ({ notes }: Notes) => {
     }
   }
 
-  const handleSubmit = async (data: FormData) => {
+  const handleSubmit = async (data: NoteFormData) => {
     try {
       create(data);
     } catch (error) {

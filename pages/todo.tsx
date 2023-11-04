@@ -2,18 +2,7 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { prisma } from "../lib/prisma";
-
-interface Comments {
-  comments: {
-    id: string;
-    title: string;
-    comment: string;
-  }[];
-}
-interface FormData {
-  comment: string;
-  id: string;
-}
+import { Comments, CommentFormData } from "../constant/index";
 
 const TodoPage = ({ comments }: Comments) => {
   // TODO
@@ -23,7 +12,7 @@ const TodoPage = ({ comments }: Comments) => {
   //page [id] details of the post
   //login page ui and design
   //login system
-  const [form, setForm] = useState<FormData>({
+  const [form, setForm] = useState<CommentFormData>({
     comment: "",
     id: "",
   });
@@ -33,7 +22,7 @@ const TodoPage = ({ comments }: Comments) => {
     router.replace(router.asPath);
   };
 
-  async function create(data: FormData) {
+  async function create(data: CommentFormData) {
     try {
       fetch("http://localhost:3000/api/todo", {
         body: JSON.stringify(data),
@@ -71,7 +60,7 @@ const TodoPage = ({ comments }: Comments) => {
     }
   }
 
-  const handleSubmit = async (data: FormData) => {
+  const handleSubmit = async (data: CommentFormData) => {
     try {
       create(data);
     } catch (error) {
