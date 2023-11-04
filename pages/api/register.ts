@@ -1,21 +1,21 @@
 import { prisma } from "../../lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
+import bcrypt from "bcryptjs";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
 
   try {
     console.log(`${email} and ${password}`);
-    await prisma.user.create({
-      data: {
-        email: email,
-        password: password,
-      },
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await prisma.user.create({
+      data: { name, email, password: hashedPassword },
     });
-    res.status(200).json({ message: "Note Created" });
+
+    res.status(201).json({ message: "Note Created" });
     console.log("no server error");
     alert("user created!");
   } catch (err) {

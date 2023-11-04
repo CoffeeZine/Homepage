@@ -13,12 +13,14 @@ interface Logins {
 interface FormData {
   email: string;
   password: string;
+  name: string;
 }
 
 const Register = ({ login }: Logins) => {
   const [form, setForm] = useState<FormData>({
     email: "",
     password: "",
+    name: "",
   });
   const router = useRouter();
 
@@ -35,7 +37,7 @@ const Register = ({ login }: Logins) => {
         },
         method: "POST",
       }).then(() => {
-        setForm({ email: "", password: "" });
+        setForm({ name: "", email: "", password: "" });
         refreshData();
       });
     } catch (error) {
@@ -61,6 +63,14 @@ const Register = ({ login }: Logins) => {
         }}
         className="w-auto min-w-[25%] max-w-min mx-auto space-y-6 flex flex-col items-stretch"
       >
+        <input
+          required
+          type="name"
+          placeholder="Name"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          className="border-2 rounded border-gray-600 p-1"
+        />
         <input
           required
           type="email"
