@@ -15,7 +15,7 @@ const Home = ({ notes }: Notes) => {
   const refreshData = () => {
     router.replace(router.asPath);
   };
-
+  //sunday holiday
   async function create(data: NoteFormData) {
     try {
       fetch("http://localhost:3000/api/create", {
