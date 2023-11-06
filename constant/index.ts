@@ -5,67 +5,7 @@ export const NavLinks = [
   { href: "/", key: "Career Advancement", text: "Career Advancement" },
   { href: "/", key: "Hire Developers", text: "Hire Developers" },
 ];
-export interface Notes {
-  notes: {
-    id: string;
-    title: string;
-    content: string;
-  }[];
-}
-export interface Comments {
-  comments: {
-    id: string;
-    title: string;
-    comment: string;
-  }[];
-}
-export interface CommentFormData {
-  comment: string;
-  id: string;
-}
-export interface Author {
-  id: string;
-  email: string;
-  password: string;
-  name?: string;
-  address?: string;
-}
-export interface Posts {
-  posts: {
-    id: string;
-    title: string;
-    body: string;
-    slug: string;
-  }[];
-}
 
-export interface PostFormData {
-  title: string;
-  body: string;
-  slug: string;
-  id: string;
-}
-export interface LoginFormData {
-  email: string;
-  password: string;
-}
-export interface NoteFormData {
-  title: string;
-  content: string;
-  id: string;
-}
-export interface RegisterFormData {
-  email: string;
-  password: string;
-  name: string;
-}
-export interface Logins {
-  login: {
-    id: string;
-    name: string;
-    password: string;
-  }[];
-}
 export const categoryFilters = [
   "Frontend",
   "Backend",
@@ -152,3 +92,65 @@ export const footerLinks = [
     ],
   },
 ];
+
+export interface Notes {
+  notes: {
+    id: string;
+    title: string;
+    content: string;
+  }[];
+}
+export interface Comments {
+  comments: {
+    id: string;
+    title: string;
+    comment: string;
+  }[];
+}
+export interface CommentFormData {
+  comment: string;
+  id: string;
+}
+export interface Author {
+  id: string;
+  email: string;
+  password: string;
+  name?: string;
+  address?: string;
+}
+export interface Posts {
+  posts: {
+    id: string;
+    title: string;
+    body: string;
+    slug: string;
+  }[];
+}
+
+export interface PostFormData {
+  title: string;
+  body: string;
+  slug: string;
+  id: string;
+}
+export interface LoginFormData {
+  email: string;
+  password: string;
+}
+export interface NoteFormData {
+  title: string;
+  content: string;
+  id: string;
+}
+export interface RegisterFormData {
+  email: string;
+  password: string;
+  name: string;
+}
+export interface Logins {
+  login: {
+    id: string;
+    name: string;
+    password: string;
+  }[];
+}
