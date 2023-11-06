@@ -1,8 +1,9 @@
+"use client";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { prisma } from "../lib/prisma";
-import { Posts, PostFormData } from "../constant/index";
+import { prisma } from "../../lib/prisma";
+import { Posts, PostFormData } from "../../constant/index";
 
 const Post = ({ posts }: Posts) => {
   const [form, setForm] = useState<PostFormData>({
