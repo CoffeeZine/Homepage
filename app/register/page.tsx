@@ -1,8 +1,9 @@
+"use client";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { prisma } from "../lib/prisma";
-import { Logins, RegisterFormData } from "../constant/index";
+import { prisma } from "../../lib/prisma";
+import { Logins, RegisterFormData } from "../../constant/index";
 
 const Register = ({ login }: Logins) => {
   const [form, setForm] = useState<RegisterFormData>({
