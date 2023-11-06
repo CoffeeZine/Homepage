@@ -1,16 +1,15 @@
-import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
+"use client";
+import router from "next/router";
+// import { useRouter } from "next/router";
 import { useState } from "react";
-import { prisma } from "../lib/prisma";
-import { Logins, LoginFormData } from "../constant/index";
+import { Logins, LoginFormData } from "../../constant/index";
 
-//25 year old version
 const Login = ({ login }: Logins) => {
   const [form, setForm] = useState<LoginFormData>({
     email: "",
     password: "",
   });
-  const router = useRouter();
+  // const router = useRouter();
 
   const refreshData = () => {
     router.replace(router.asPath);
