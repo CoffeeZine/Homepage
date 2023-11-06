@@ -1,8 +1,9 @@
+"use client";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { prisma } from "../lib/prisma";
-import { Comments, CommentFormData } from "../constant/index";
+import { prisma } from "../../lib/prisma";
+import { Comments, CommentFormData } from "../../constant/index";
 
 const TodoPage = ({ comments }: Comments) => {
   // TODO
@@ -124,17 +125,17 @@ const TodoPage = ({ comments }: Comments) => {
 
 export default TodoPage;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const comments = await prisma.todo.findMany({
-    select: {
-      id: true,
-      comment: true,
-    },
-  });
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const comments = await prisma.todo.findMany({
+//     select: {
+//       id: true,
+//       comment: true,
+//     },
+//   });
 
-  return {
-    props: {
-      comments,
-    },
-  };
-};
+//   return {
+//     props: {
+//       comments,
+//     },
+//   };
+// };
