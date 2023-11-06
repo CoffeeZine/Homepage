@@ -4,7 +4,7 @@ import { useState } from "react";
 import { prisma } from "../lib/prisma";
 import { Notes, NoteFormData } from "../constant/index";
 
-const Home = ({ notes }: Notes) => {
+const Note = ({ notes }: Notes) => {
   const [form, setForm] = useState<NoteFormData>({
     title: "",
     content: "",
@@ -15,7 +15,7 @@ const Home = ({ notes }: Notes) => {
   const refreshData = () => {
     router.replace(router.asPath);
   };
-  //sunday holiday
+
   async function create(data: NoteFormData) {
     try {
       fetch("http://localhost:3000/api/create", {
@@ -125,7 +125,7 @@ const Home = ({ notes }: Notes) => {
   );
 };
 
-export default Home;
+export default Note;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const notes = await prisma.note.findMany({
