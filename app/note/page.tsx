@@ -1,8 +1,10 @@
+"use client";
 import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";s
+import router from "next/router";
 import { useState } from "react";
-import { prisma } from "../lib/prisma";
-import { Notes, NoteFormData } from "../constant/index";
+import { prisma } from "../../lib/prisma";
+import { Notes, NoteFormData } from "../../constant/index";
 
 const Note = ({ notes }: Notes) => {
   const [form, setForm] = useState<NoteFormData>({
@@ -10,7 +12,7 @@ const Note = ({ notes }: Notes) => {
     content: "",
     id: "",
   });
-  const router = useRouter();
+  // const router = useRouter();
 
   const refreshData = () => {
     router.replace(router.asPath);
@@ -91,7 +93,7 @@ const Note = ({ notes }: Notes) => {
       </form>
       <div className="w-auto min-w-[25%] max-w-min mt-20 mx-auto space-y-6 flex flex-col items-stretch">
         <ul>
-          {notes.map((note) => (
+          {notes?.map((note) => (
             <li key={note.id} className="border-b border-gray-600 p-2">
               <div className="flex justify-between">
                 <div className="flex-1">
@@ -127,18 +129,18 @@ const Note = ({ notes }: Notes) => {
 
 export default Note;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const notes = await prisma.note.findMany({
-    select: {
-      title: true,
-      id: true,
-      content: true,
-    },
-  });
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const notes = await prisma.note.findMany({
+//     select: {
+//       title: true,
+//       id: true,
+//       content: true,
+//     },
+//   });
 
-  return {
-    props: {
-      notes,
-    },
-  };
-};
+//   return {
+//     props: {
+//       notes,
+//     },
+//   };
+// };
