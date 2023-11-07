@@ -1,21 +1,42 @@
 "use client";
-import { GetServerSideProps } from "next";
-// import { useRouter } from "next/router";s
-import router from "next/router";
-import { useState } from "react";
+import { GetStaticPropsContext } from "next";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { prisma } from "../../lib/prisma";
 import { Notes, NoteFormData } from "../../constant/index";
+import { PrismaClient } from "@prisma/client";
 
-const Note = ({ notes }: Notes) => {
+const Note = () => {
+  // const Note = ({ notes }: Notes) => {
+  // const prisma = new PrismaClient();
   const [form, setForm] = useState<NoteFormData>({
     title: "",
     content: "",
     id: "",
   });
-  // const router = useRouter();
+  const [notes, setNotes] = useState<Notes[]>([]);
+  useEffect(() => {
+    (async () => {
+      // const note: any = await prisma.note.findMany({
+      //   select: {
+      //     title: true,
+      //     id: true,
+      //     content: true,
+      //   },
+      // });
+      // console.log("note" + note);
+      // if (!note) {
+      //   router.push("/notFound");
+      //   return;
+      // }
+      // setNotes(note);
+    })();
+  }, []);
+
+  const router = useRouter();
 
   const refreshData = () => {
-    router.replace(router.asPath);
+    router.push("/note");
   };
 
   async function create(data: NoteFormData) {
@@ -30,9 +51,11 @@ const Note = ({ notes }: Notes) => {
         if (data.id) {
           deleteNote(data.id);
           setForm({ title: "", content: "", id: "" });
+          console.log("refresh");
           refreshData();
         } else {
           setForm({ title: "", content: "", id: "" });
+          alert("error");
           refreshData();
         }
       });
@@ -128,19 +151,3 @@ const Note = ({ notes }: Notes) => {
 };
 
 export default Note;
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const notes = await prisma.note.findMany({
-//     select: {
-//       title: true,
-//       id: true,
-//       content: true,
-//     },
-//   });
-
-//   return {
-//     props: {
-//       notes,
-//     },
-//   };
-// };
