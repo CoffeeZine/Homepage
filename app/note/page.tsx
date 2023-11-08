@@ -17,7 +17,7 @@ const Note = () => {
   const [notes, setNotes] = useState<Notes[]>([]);
   useEffect(() => {
     (async () => {
-      console.log("hello");
+      // console.log("hello");
       // const note: any = await prisma.note.findMany({
       //   select: {
       //     title: true,
