@@ -17,6 +17,7 @@ const Note = () => {
   const [notes, setNotes] = useState<Notes[]>([]);
   useEffect(() => {
     (async () => {
+      console.log("hello");
       // const note: any = await prisma.note.findMany({
       //   select: {
       //     title: true,
@@ -116,7 +117,7 @@ const Note = () => {
       </form>
       <div className="w-auto min-w-[25%] max-w-min mt-20 mx-auto space-y-6 flex flex-col items-stretch">
         <ul>
-          {notes?.map((note) => (
+          {notes?.map((note: any) => (
             <li key={note.id} className="border-b border-gray-600 p-2">
               <div className="flex justify-between">
                 <div className="flex-1">
