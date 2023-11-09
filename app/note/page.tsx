@@ -7,6 +7,7 @@ import { Notes, NoteFormData } from "../../constant/index";
 import { PrismaClient } from "@prisma/client";
 
 const Note = () => {
+  //no time to study the problem
   // const Note = ({ notes }: Notes) => {
   // const prisma = new PrismaClient();
   const [form, setForm] = useState<NoteFormData>({
