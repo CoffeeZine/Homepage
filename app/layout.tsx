@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import Footer from "../components/Footer";
-// import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 
 export const metadata = {
   title: "Flexibble",
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        {/* <Navbar /> */}
+        <Navbar />
         <main>{children}</main>
         <Footer />
       </body>
