@@ -1,4 +1,4 @@
-//weekend holiday
+//weekend holidayo //no time codeto
 export const NavLinks = [
   { href: "/", key: "Inspiration", text: "Inspiration" },
   { href: "/", key: "Find Projects", text: "Find Projects" },
