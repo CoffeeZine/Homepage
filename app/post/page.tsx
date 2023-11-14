@@ -137,19 +137,19 @@ const Post = ({ posts }: Posts) => {
 
 export default Post;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const posts = await prisma.post.findMany({
-    select: {
-      title: true,
-      id: true,
-      body: true,
-      slug: true,
-    },
-  });
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const posts = await prisma.post.findMany({
+//     select: {
+//       title: true,
+//       id: true,
+//       body: true,
+//       slug: true,
+//     },
+//   });
 
-  return {
-    props: {
-      posts,
-    },
-  };
-};
+//   return {
+//     props: {
+//       posts,
+//     },
+//   };
+// };

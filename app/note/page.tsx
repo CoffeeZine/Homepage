@@ -16,24 +16,24 @@ const Note = () => {
     id: "",
   });
   const [notes, setNotes] = useState<Notes[]>([]);
-  useEffect(() => {
-    (async () => {
-      // console.log("hello");
-      // const note: any = await prisma.note.findMany({
-      //   select: {
-      //     title: true,
-      //     id: true,
-      //     content: true,
-      //   },
-      // });
-      // console.log("note" + note);
-      // if (!note) {
-      //   router.push("/notFound");
-      //   return;
-      // }
-      // setNotes(note);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  // console.log("hello");
+  // const note: any = await prisma.note.findMany({
+  //   select: {
+  //     title: true,
+  //     id: true,
+  //     content: true,
+  //   },
+  // });
+  // console.log("note" + note);
+  // if (!note) {
+  //   router.push("/notFound");
+  //   return;
+  // }
+  // setNotes(note);
+  //   })();
+  // }, []);
 
   const router = useRouter();
 
@@ -104,13 +104,13 @@ const Note = () => {
           placeholder="Title"
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
-          className="border-2 rounded border-gray-600 p-1"
+          className="border-2 rounded border-gray-600 p-1 bg-blue-300 text-white"
         />
         <textarea
           placeholder="Content"
           value={form.content}
           onChange={(e) => setForm({ ...form, content: e.target.value })}
-          className="border-2 rounded border-gray-600 p-1"
+          className="border-2 rounded border-gray-600 p-1 bg-blue-300 text-white"
         />
         <button type="submit" className="bg-blue-500 text-white rounded p-1">
           Add +
