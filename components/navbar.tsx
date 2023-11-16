@@ -8,7 +8,7 @@ import { NavLinks } from "../constant";
 // import Button from "./Button";
 // import ProfileMenu from "./ProfileMenu";
 
-const Navbar = async () => {
+const Navbar = () => {
   //   const session = await getCurrentUser()
 
   return (
@@ -18,11 +18,11 @@ const Navbar = async () => {
           <Image src="/logo.svg" width={116} height={43} alt="logo" />
         </Link>
         <ul className="xl:flex hidden text-small gap-7">
-          {/* {NavLinks.map((link: any) => (
+          {NavLinks.map((link: any) => (
             <Link href={link.href} key={link.text}>
               {link.text}
             </Link>
-          ))} */}
+          ))}
         </ul>
       </div>
 
