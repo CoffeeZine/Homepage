@@ -1,7 +1,7 @@
 //weekend holidayo //no time codeto
 export const NavLinks = [
-  { href: "/", key: "Inspiration", text: "Inspiration" },
-  { href: "/", key: "Find Projects", text: "Find Projects" },
+  { href: "/note", key: "Note", text: "Note" },
+  { href: "/post", key: "Post", text: "Post" },
   { href: "/", key: "Learn Development", text: "Learn Development" },
   { href: "/", key: "Career Advancement", text: "Career Advancement" },
   { href: "/", key: "Hire Developers", text: "Hire Developers" },
