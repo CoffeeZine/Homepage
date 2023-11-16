@@ -16,13 +16,14 @@ export default async function handler(
         },
       },
     });
-    console.log(response);
+    console.log("response123", response);
     await prisma.post.create({
       data: {
         title: title,
         slug: slug,
         body: body,
-        author: author,
+        author: {},
+        // authorId:response?.id
       },
     });
     res.status(200).json({ message: "Note Created" });
