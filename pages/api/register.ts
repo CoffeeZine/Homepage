@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { name, email, password } = req.body;
-
+  //update
   try {
     console.log(`${email} and ${password}`);
     const hashedPassword = await bcrypt.hash(password, 10);
