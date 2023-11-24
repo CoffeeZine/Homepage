@@ -8,6 +8,7 @@ export default async function handler(
 ) {
   const { name, email, password } = req.body;
   //update
+  //friday coding
   try {
     console.log(`${email} and ${password}`);
     const hashedPassword = await bcrypt.hash(password, 10);
