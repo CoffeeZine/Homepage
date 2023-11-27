@@ -10,6 +10,7 @@ export default async function handler(
   //update
   //friday coding
   //sunday coding
+  //monday coding
   try {
     console.log(`${email} and ${password}`);
     const hashedPassword = await bcrypt.hash(password, 10);
