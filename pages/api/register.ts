@@ -9,6 +9,7 @@ export default async function handler(
   const { name, email, password } = req.body;
   //update
   //friday coding
+  //Saturday Coding
   //sunday coding
   //monday coding
   //tuseday coding
